@@ -53,12 +53,28 @@ nav a {
 }
 
 .dark-toggle {
-  cursor: pointer;
-  background: #666;
-  color: #fff;
+  padding: 8px;
+  border-radius: 50%;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dark-toggle .icon {
+  font-size: 1.2rem;
+}
+
+/* Hide moon in light mode, sun in dark mode */
+.dark-toggle .moon {
+  display: none;
+}
+
+body.dark-mode .dark-toggle .sun {
+  display: none;
+}
+
+body.dark-mode .dark-toggle .moon {
+  display: inline;
 }
 
 .hero {
