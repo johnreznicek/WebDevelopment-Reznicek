@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starter Website</title>
   <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --header-bg: #333;
+      --header-text: #fff;
+    }
+
+    body.dark-mode {
+      --bg-color: #181818;
+      --text-color: #f1f1f1;
+      --header-bg: #111;
+      --header-text: #f9f9f9;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,18 +28,21 @@
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      background: #f9f9f9;
-      color: #333;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background: #333;
-      color: #fff;
+      background: var(--header-bg);
+      color: var(--header-text);
       padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
-      margin: 0;
       font-size: 1.8rem;
     }
 
@@ -33,12 +50,46 @@
       list-style: none;
       display: flex;
       gap: 1rem;
-      margin-top: 0.5rem;
+      position: relative;
+    }
+
+    nav li {
+      position: relative;
     }
 
     nav a {
-      color: #fff;
+      color: var(--header-text);
       text-decoration: none;
+      padding: 5px 10px;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 35px;
+      background: #444;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 5px 0;
+    }
+
+    nav li:hover .dropdown-content {
+      display: block;
+    }
+
+    .dark-toggle {
+      cursor: pointer;
+      background: #666;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
     }
 
     .hero {
@@ -56,9 +107,34 @@
       padding: 2rem;
     }
 
+    .collapsible {
+      background-color: #ccc;
+      cursor: pointer;
+      padding: 10px;
+      border: none;
+      outline: none;
+      width: 100%;
+      text-align: left;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .active, .collapsible:hover {
+      background-color: #bbb;
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: #eee;
+      padding: 0 15px;
+    }
+
     footer {
-      background: #333;
-      color: #fff;
+      background: var(--header-bg);
+      color: var(--header-text);
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
@@ -74,13 +150,24 @@
 <body>
   <header>
     <h1>My Starter Site</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
+    <div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li>
+            <a href="#">More ▾</a>
+            <div class="dropdown-content">
+              <a href="#">Knowledge</a>
+              <a href="#">Projects</a>
+              <a href="#">Blog</a>
+            </div>
+          </li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
   </header>
 
   <section class="hero">
@@ -93,8 +180,60 @@
     <p>This site is built using plain HTML and CSS. You can use this as a starting point for building personal, business, or portfolio websites.</p>
   </section>
 
+  <section class="content">
+    <button type="button" class="collapsible">General Knowledge: What Is a Static Website?</button>
+    <div class="collapsible-content">
+      <p>A <strong>static website</strong> is made of web pages with fixed content. These pages are built using HTML and CSS and are served to the user's browser without any server-side processing.</p>
+
+      <h4>Key Features</h4>
+      <ul>
+        <li><strong>Simplicity:</strong> Easy to build and maintain.</li>
+        <li><strong>Consistency:</strong> Same content for every user.</li>
+        <li><strong>Performance:</strong> Loads fast since there's no backend processing.</li>
+        <li><strong>Security:</strong> No database or dynamic scripts = less risk.</li>
+        <li><strong>Cost-Effective:</strong> Cheaper to host and maintain.</li>
+      </ul>
+
+      <h4>Limitations</h4>
+      <ul>
+        <li>Content changes must be done manually.</li>
+        <li>No user interactivity or real-time features.</li>
+        <li>Not ideal for large-scale, dynamic applications.</li>
+      </ul>
+
+      <h4>Best Uses</h4>
+      <ul>
+        <li>Personal blogs or portfolios</li>
+        <li>Company info pages</li>
+        <li>Landing pages for marketing</li>
+      </ul>
+
+      <p>Read more on <a href="https://www.geeksforgeeks.org/static-websites/" target="_blank">GeeksforGeeks</a>.</p>
+    </div>
+  </section>
+
   <footer>
     <p>&copy; 2025 My Starter Site. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    // Collapsible Section
+    const coll = document.querySelector('.collapsible');
+    const content = document.querySelector('.collapsible-content');
+
+    coll.addEventListener('click', () => {
+      coll.classList.toggle('active');
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  </script>
 </body>
 </html>
