@@ -142,3 +142,48 @@ footer {
     flex-direction: column;
   }
 }
+
+.dark-toggle {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .sun {
+    transform: rotate(0deg);
+  }
+  
+  .moon {
+    transform: rotate(180deg);
+  }
+  
+  body.light-mode .sun {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  
+  body.light-mode .moon {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  
+  body.dark-mode .sun {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  
+  body.dark-mode .moon {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  
