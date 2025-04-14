@@ -17,6 +17,8 @@
       --text-color: #f1f1f1;
       --header-bg: #111;
       --header-text: #f9f9f9;
+      --hero-bg: linear-gradient(to right, #1f1f1f, #292929);
+
     }
 
     * {
@@ -93,9 +95,11 @@
     }
 
     .hero {
-      padding: 3rem 2rem;
-      background: #e1ecf4;
-      text-align: center;
+        padding: 3rem 2rem;
+        background: var(--hero-bg, #e1ecf4);
+        text-align: center;
+        color: var(--text-color);
+
     }
 
     .hero h2 {
