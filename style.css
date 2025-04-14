@@ -240,4 +240,48 @@ footer {
   body.dark-mode .project-card a {
     color: #82b1ff;
   }
+
+
+  .about-section {
+    padding-top: 1rem;
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .about-text, .about-extra {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--text-color);
+  }
+  
+  .about-text ul, .about-extra ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .about-text ul li::before, .about-extra ul li::before {
+    content: "•";
+    color: var(--text-color);
+    margin-right: 0.5rem;
+  }
+  
+  blockquote {
+    font-style: italic;
+    margin-top: 1rem;
+    color: var(--text-color);
+    border-left: 4px solid var(--text-color);
+    padding-left: 1rem;
+  }
+  
+  body.dark-mode .about-text, 
+  body.dark-mode .about-extra {
+    background-color: #1e1e1e;
+    border-color: #888;
+  }
   
