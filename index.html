@@ -128,8 +128,26 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease-out;
-      background-color: #eee;
+      background-color: var(--bg-color);  /* Use theme bg */
+      color: var(--text-color);           /* Use theme text */
       padding: 0 15px;
+    }
+
+    /* Make list items and headers consistent in collapsible */
+    .collapsible-content h4,
+    .collapsible-content ul,
+    .collapsible-content li,
+    .collapsible-content p {
+    color: var(--text-color);
+    }
+
+    /* Link styling for light and dark */
+    .collapsible-content a {
+    color: #1a73e8; /* Default blue for light mode */
+    }
+
+    body.dark-mode .collapsible-content a {
+    color: #82b1ff; /* Lighter blue for dark mode */
     }
 
     footer {
