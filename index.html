@@ -3,192 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Starter Website</title>
-  <style>
-    :root {
-      --bg-color: #f9f9f9;
-      --text-color: #333;
-      --header-bg: #333;
-      --header-text: #fff;
-    }
-
-    body.dark-mode {
-      --bg-color: #181818;
-      --text-color: #f1f1f1;
-      --header-bg: #111;
-      --header-text: #f9f9f9;
-      --hero-bg: linear-gradient(to right, #1f1f1f, #292929);
-
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: var(--bg-color);
-      color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    header {
-      background: var(--header-bg);
-      color: var(--header-text);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      position: relative;
-    }
-
-    nav li {
-      position: relative;
-    }
-
-    nav a {
-      color: var(--header-text);
-      text-decoration: none;
-      padding: 5px 10px;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 35px;
-      background: #444;
-      padding: 10px;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      color: white;
-      padding: 5px 0;
-    }
-
-    nav li:hover .dropdown-content {
-      display: block;
-    }
-
-    .dark-toggle {
-      cursor: pointer;
-      background: #666;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-    }
-
-    .hero {
-        padding: 3rem 2rem;
-        background: var(--hero-bg, #e1ecf4);
-        text-align: center;
-        color: var(--text-color);
-
-    }
-
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .content {
-      padding: 2rem;
-    }
-
-    .collapsible {
-      background-color: #ccc;
-      cursor: pointer;
-      padding: 10px;
-      border: none;
-      outline: none;
-      width: 100%;
-      text-align: left;
-      font-size: 1.1rem;
-      transition: background 0.3s;
-      margin-bottom: 10px;
-    }
-
-    .active, .collapsible:hover {
-      background-color: #bbb;
-    }
-
-    .collapsible-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-      background-color: var(--bg-color);  /* Use theme bg */
-      color: var(--text-color);           /* Use theme text */
-      padding: 0 15px;
-    }
-
-    /* Make list items and headers consistent in collapsible */
-    .collapsible-content h4,
-    .collapsible-content ul,
-    .collapsible-content li,
-    .collapsible-content p {
-    color: var(--text-color);
-    }
-
-    /* Link styling for light and dark */
-    .collapsible-content a {
-    color: #1a73e8; /* Default blue for light mode */
-    }
-
-    body.dark-mode .collapsible-content a {
-    color: #82b1ff; /* Lighter blue for dark mode */
-    }
-
-    footer {
-      background: var(--header-bg);
-      color: var(--header-text);
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>My Starter Site</h1>
-    <div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li>
-            <a href="#">More ▾</a>
-            <div class="dropdown-content">
-              <a href="#">Knowledge</a>
-              <a href="#">Projects</a>
-              <a href="#">Blog</a>
-            </div>
-          </li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
     <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
   </header>
 
@@ -238,24 +66,6 @@
     <p>&copy; 2025 My Starter Site. All rights reserved.</p>
   </footer>
 
-  <script>
-    // Dark Mode Toggle
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-
-    // Collapsible Section
-    const coll = document.querySelector('.collapsible');
-    const content = document.querySelector('.collapsible-content');
-
-    coll.addEventListener('click', () => {
-      coll.classList.toggle('active');
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

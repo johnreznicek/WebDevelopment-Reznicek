@@ -1,0 +1,128 @@
+/* Add your CSS styles here */ :root {
+  --bg-color: #f9f9f9;
+  --text-color: #333;
+  --header-bg: #333;
+  --header-text: #fff;
+  --hero-bg: #e1ecf4;
+}
+
+body.dark-mode {
+  --bg-color: #181818;
+  --text-color: #f1f1f1;
+  --header-bg: #111;
+  --header-text: #f9f9f9;
+  --hero-bg: #222;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: var(--header-text);
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.dark-toggle {
+  cursor: pointer;
+  background: #666;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.hero {
+  padding: 3rem 2rem;
+  background: var(--hero-bg);
+  text-align: center;
+  color: var(--text-color);
+}
+
+.content {
+  padding: 2rem;
+}
+
+.collapsible {
+  background-color: #ccc;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  transition: background 0.3s;
+  margin-bottom: 10px;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #bbb;
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 0 15px;
+}
+
+.collapsible-content h4,
+.collapsible-content ul,
+.collapsible-content li,
+.collapsible-content p {
+  color: var(--text-color);
+}
+
+.collapsible-content a {
+  color: #1a73e8;
+}
+body.dark-mode .collapsible-content a {
+  color: #82b1ff;
+}
+
+footer {
+  background: var(--header-bg);
+  color: var(--header-text);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+  }
+}
