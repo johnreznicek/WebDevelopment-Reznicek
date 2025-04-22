@@ -3,7 +3,7 @@ function toggleDarkMode() {
   document.body.classList.toggle("light-mode");
 }
 
-// 🌈 Load theme preference
+// === THEME LOADING ===
 const themeSelector = document.getElementById("themeSelector");
 if (themeSelector) {
   const savedTheme = localStorage.getItem("site-theme") || "blue";
@@ -18,7 +18,7 @@ if (themeSelector) {
   });
 }
 
-// 🌗 Load dark mode if stored (optional enhancement)
+// === DARK MODE LOADING ===
 const savedDarkMode = localStorage.getItem("dark-mode");
 if (savedDarkMode === "true") {
   document.body.classList.add("dark-mode");
@@ -26,7 +26,7 @@ if (savedDarkMode === "true") {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Dark mode toggle
+  // === TOGGLE BUTTON ===
   const toggle = document.getElementById("themeToggle");
   if (toggle) {
     toggle.addEventListener("click", () => {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Collapsible content
+  // === COLLAPSIBLE SECTION ===
   const coll = document.querySelector(".collapsible");
   const content = document.querySelector(".collapsible-content");
   if (coll && content) {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Show/hide new project form
+  // === TOGGLE PROJECT FORM ===
   const showFormBtn = document.getElementById("showFormBtn");
   const projectForm = document.getElementById("projectForm");
   if (showFormBtn && projectForm) {
@@ -54,11 +54,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 🔁 Load saved projects from localStorage
+  // === PROJECT PERSISTENCE ===
+  const form = document.getElementById("newProjectForm");
   const grid = document.querySelector(".project-grid");
-  const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
-  savedProjects.forEach(project => {
+  function getSavedProjects() {
+    return JSON.parse(localStorage.getItem("projects")) || [];
+  }
+
+  function saveProjectList(projects) {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }
+
+  function createCard(project) {
     const card = document.createElement("div");
     card.className = "project-card";
     card.innerHTML = `
@@ -68,10 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
       <a href="${project.link}" target="_blank">View</a>
     `;
     grid.appendChild(card);
-  });
+  }
 
-  // ➕ Add new project
-  const form = document.getElementById("newProjectForm");
+  // Load saved projects at startup
+  const existing = getSavedProjects();
+  existing.forEach(createCard);
+
+  // Handle new project submissions
   if (form && grid) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -81,19 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const tags = document.getElementById("projTags").value.split(",").map(t => t.trim());
       const link = document.getElementById("projLink").value;
 
-      const project = { title, desc, tags, link };
-      savedProjects.push(project);
-      localStorage.setItem("projects", JSON.stringify(savedProjects));
+      const newProject = { title, desc, tags, link };
+      const updated = [...getSavedProjects(), newProject];
 
-      const card = document.createElement("div");
-      card.className = "project-card";
-      card.innerHTML = `
-        <h4>${title}</h4>
-        <p>${desc}</p>
-        <div class="tags">${tags.map(t => `<span>${t}</span>`).join("")}</div>
-        <a href="${link}" target="_blank">View</a>
-      `;
-      grid.appendChild(card);
+      saveProjectList(updated);
+      createCard(newProject);
 
       form.reset();
       projectForm.style.display = "none";
