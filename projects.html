@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projects</title>
   <link rel="stylesheet" href="style.css" />
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-database.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyBOTXrX13hClW271AaG1dYhqhpkKfw7Xqw",
+      authDomain: "my-portfolio-2ee5e.firebaseapp.com",
+      databaseURL: "https://my-portfolio-2ee5e-default-rtdb.firebaseio.com",
+      projectId: "my-portfolio-2ee5e",
+      storageBucket: "my-portfolio-2ee5e.appspot.com",
+      messagingSenderId: "654068601707",
+      appId: "1:654068601707:web:912deabcc1dd66adba722e",
+      measurementId: "G-TJ94HQ5DR6"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+  
+    // Expose Firebase DB globally so other scripts can access it
+    window.firebaseDB = db;
+    window.firebaseRef = ref;
+    window.firebasePush = push;
+    window.firebaseOnValue = onValue;
+  </script>
 </head>
 <body class="light-mode">
   <header>
