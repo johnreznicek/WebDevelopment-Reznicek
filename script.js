@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const projectForm = document.getElementById("projectForm");
   if (showFormBtn && projectForm) {
     showFormBtn.addEventListener("click", () => {
+      console.log("Button clicked"); // ✅ Debug statement here
       projectForm.style.display = projectForm.style.display === "none" ? "block" : "none";
     });
   }
