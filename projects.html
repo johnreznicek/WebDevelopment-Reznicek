@@ -54,7 +54,94 @@
     <p>&copy; 2025 My Starter Site. All rights reserved.</p>
   </footer>
 
-  <script type="module" src="firebase.js"></script>
-  <script src="script.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBOTXrX13hClW271AaG1dYhqhpkKfw7Xqw",
+      authDomain: "my-portfolio-2ee5e.firebaseapp.com",
+      databaseURL: "https://my-portfolio-2ee5e-default-rtdb.firebaseio.com",
+      projectId: "my-portfolio-2ee5e",
+      storageBucket: "my-portfolio-2ee5e.appspot.com",
+      messagingSenderId: "654068601707",
+      appId: "1:654068601707:web:912deabcc1dd66adba722e",
+      measurementId: "G-TJ94HQ5DR6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const themeToggle = document.getElementById("themeToggle");
+    const themeSelector = document.getElementById("themeSelector");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const showFormBtn = document.getElementById("showFormBtn");
+      const projectForm = document.getElementById("projectForm");
+      const grid = document.querySelector(".project-grid");
+
+      // Load existing projects from Firebase
+      const dbRef = ref(db, 'projects');
+      onValue(dbRef, (snapshot) => {
+        grid.innerHTML = ''; // Clear grid before repopulating
+        snapshot.forEach(childSnapshot => {
+          const project = childSnapshot.val();
+          const card = document.createElement("div");
+          card.className = "project-card";
+          card.innerHTML = `
+            <h4>${project.title}</h4>
+            <p>${project.desc}</p>
+            <div class="tags">${project.tags.map(t => `<span>${t}</span>`).join("")}</div>
+            <a href="${project.link}" target="_blank">View</a>
+          `;
+          grid.appendChild(card);
+        });
+      });
+
+      // Show/hide form toggle
+      showFormBtn.addEventListener("click", () => {
+        projectForm.style.display = projectForm.style.display === "none" ? "block" : "none";
+      });
+
+      // Form submission handler
+      const form = document.getElementById("newProjectForm");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = document.getElementById("projTitle").value;
+        const desc = document.getElementById("projDesc").value;
+        const tags = document.getElementById("projTags").value.split(",").map(t => t.trim());
+        const link = document.getElementById("projLink").value;
+
+        const project = { title, desc, tags, link };
+        push(ref(db, 'projects'), project);
+
+        form.reset();
+        projectForm.style.display = "none";
+      });
+
+      // Dark mode
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          document.body.classList.toggle("light-mode");
+          localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode"));
+        });
+      }
+
+      // Theme selector
+      if (themeSelector) {
+        const savedTheme = localStorage.getItem("site-theme") || "blue";
+        document.body.classList.add(`theme-${savedTheme}`);
+        themeSelector.value = savedTheme;
+
+        themeSelector.addEventListener("change", (e) => {
+          const selected = e.target.value;
+          document.body.classList.remove("theme-blue", "theme-green", "theme-pink");
+          document.body.classList.add(`theme-${selected}`);
+          localStorage.setItem("site-theme", selected);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
