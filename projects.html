@@ -2,33 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects</title>
   <link rel="stylesheet" href="style.css" />
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-database.js";
-  
-    const firebaseConfig = {
-      apiKey: "AIzaSyBOTXrX13hClW271AaG1dYhqhpkKfw7Xqw",
-      authDomain: "my-portfolio-2ee5e.firebaseapp.com",
-      databaseURL: "https://my-portfolio-2ee5e-default-rtdb.firebaseio.com",
-      projectId: "my-portfolio-2ee5e",
-      storageBucket: "my-portfolio-2ee5e.appspot.com",
-      messagingSenderId: "654068601707",
-      appId: "1:654068601707:web:912deabcc1dd66adba722e",
-      measurementId: "G-TJ94HQ5DR6"
-    };
-  
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-  
-    // Expose Firebase DB globally so other scripts can access it
-    window.firebaseDB = db;
-    window.firebaseRef = ref;
-    window.firebasePush = push;
-    window.firebaseOnValue = onValue;
-  </script>
 </head>
 <body class="light-mode">
   <header>
@@ -45,13 +21,11 @@
       <span class="icon sun">☀️</span>
       <span class="icon moon">🌙</span>
     </button>
-    
     <select id="themeSelector" aria-label="Choose a theme">
-        <option value="blue">🔵 Blue</option>
-        <option value="green">🌿 Green</option>
-        <option value="pink">🍓 Pink</option>
+      <option value="blue">🔵 Blue</option>
+      <option value="green">🌿 Green</option>
+      <option value="pink">🍓 Pink</option>
     </select>
-      
   </header>
 
   <section class="hero parallax-hero">
@@ -61,17 +35,7 @@
 
   <section class="content">
     <h3>Project Showcase</h3>
-    <div class="project-grid">
-      <div class="project-card">
-        <h4>🌐 Static Website Builder</h4>
-        <p>A clean, responsive website with dark mode, collapsible sections, and animated features.</p>
-        <div class="tags">
-          <span>HTML</span><span>CSS</span><span>Dark Mode</span>
-        </div>
-        <a href="https://github.com/johnreznicek/WebDevelopment-Reznicek" target="_blank">View Code</a>
-      </div>
-    </div>
-
+    <div class="project-grid"></div>
     <button id="showFormBtn">➕ Add New Project</button>
 
     <div id="projectForm" style="display: none; margin-top: 1rem;">
@@ -90,6 +54,7 @@
     <p>&copy; 2025 My Starter Site. All rights reserved.</p>
   </footer>
 
+  <script type="module" src="firebase.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
